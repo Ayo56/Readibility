@@ -1,0 +1,49 @@
+package com.company;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Text: ");
+        String text = input.nextLine();
+
+        int Countletter = 0;
+        int Countword = 1;
+        int Countsentences = 0;
+
+        for (int i = 0; i < text.length(); i++) {
+            if (Character.isLetter(text.charAt(i)))
+                Countletter++;
+        }
+
+        for (int j = 0; j < text.length(); j++) {
+            if(text.charAt(j) == ' ')
+                Countword ++;
+        }
+
+        for (int k = 0; k < text.length(); k++) {
+            if (text.charAt(k) == '.' || text.charAt(k) == '?' || text.charAt(k) == '!' )
+                Countsentences++;
+        }
+        System.out.println(Countletter + " letters");
+        System.out.println(Countword + " words");
+        System.out.println(Countsentences + " sentences");
+
+        double level = (double)Countletter / (double)Countword * 100;
+        double sentence = (double)Countsentences / (double)Countword * 100;
+        double index = 0.0588 * level - 0.296 * sentence - 15.8;
+
+        if (index < 1) {
+            System.out.println("Before Grade 1");
+        }
+        if (index >= 16) {
+            System.out.println("Grade 16+");
+        }
+        else {
+            System.out.println("Grade " + Math.round(index));
+        }
+
+    }
+}
